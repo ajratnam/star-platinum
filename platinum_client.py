@@ -21,7 +21,8 @@ def game():
             case 2:
                 Voxel.vx_li[data].delete()
             case 3:
-                addr, pos = data.values()
+                addr, pdata = data.values()
+                pos, rot = pdata.values()
                 pos = (pos[0], pos[1] + 1, pos[2])
                 if addr not in pos_li:
                     pos_li[addr] = Voxel(pos)
@@ -29,7 +30,8 @@ def game():
                     pos_li[addr].highlight_color = color.blue
                 else:
                     pos_li[addr].position = pos
-        client.send_message(client.socket, {'op': 3, 'd': player.position})
+                pos_li[addr].rotation = rot
+        client.send_message(client.socket, {'op': 3, 'd': {'pos': player.position, 'rot': player.rotation}})
 
 
 client.connect()
