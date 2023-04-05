@@ -1,7 +1,7 @@
 from ursina import color
 
 from config import *
-from game import app, Voxel, player
+from game import app, Voxel, player, Player
 from utils import SocketBox
 
 client = SocketBox(HOST, PORT, DEBUG)
@@ -23,14 +23,11 @@ def game():
             case 3:
                 addr, pdata = data.values()
                 pos, rot = pdata.values()
-                pos = (pos[0], pos[1] + 1, pos[2])
                 if addr not in pos_li:
-                    pos_li[addr] = Voxel(pos)
-                    pos_li[addr].color = color.blue
-                    pos_li[addr].highlight_color = color.blue
-                else:
-                    pos_li[addr].position = pos
-                pos_li[addr].rotation = rot
+                    pos_li[addr] = Player()
+                pos_li[addr].change_pos(pos)
+                pos_li[addr].change_rot(rot)
+
         client.send_message(client.socket, {'op': 3, 'd': {'pos': player.position, 'rot': player.rotation}})
 
 

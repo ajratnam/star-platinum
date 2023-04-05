@@ -21,4 +21,20 @@ class Voxel(Button):
         self.vx_li[position] = self
 
 
+class Player(Entity):
+    def __init__(self):
+        super().__init__(
+            parent=scene,
+            model='cube',
+            texture='white_cube',
+            color=color.random_color()
+        )
+
+    def change_pos(self, pos):
+        self.position = pos
+
+    def change_rot(self, rot):
+        self.rotation = rot
+
+
 player = FirstPersonController()
