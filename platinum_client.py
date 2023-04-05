@@ -1,5 +1,3 @@
-from ursina import color
-
 from config import *
 from game import app, Voxel, player, Player
 from utils import SocketBox
@@ -24,7 +22,7 @@ def game():
                 addr, pdata = data.values()
                 pos, rot = pdata.values()
                 if addr not in pos_li:
-                    pos_li[addr] = Player()
+                    pos_li[addr] = Player(addr)
                 pos_li[addr].change_pos(pos)
                 pos_li[addr].change_rot(rot)
 
