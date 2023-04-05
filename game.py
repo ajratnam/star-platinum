@@ -1,11 +1,12 @@
 from ursina import *
 from ursina.prefabs.first_person_controller import FirstPersonController
 
-
-app = Ursina()
+app = Ursina(borderless=False, size=(800, 600))
 
 
 class Voxel(Button):
+    vx_li = {}
+
     def __init__(self, position=(0, 0, 0)):
         super().__init__(
             parent=scene,
@@ -17,11 +18,7 @@ class Voxel(Button):
             highlight_color=color.lime,
         )
 
-
-for z in range(8):
-    for x in range(8):
-        voxel = Voxel(position=(x, 0, z))
+        self.vx_li[position] = self
 
 
 player = FirstPersonController()
-app.run()
